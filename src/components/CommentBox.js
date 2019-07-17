@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions";
+import requireAuth from "components/requireAuth";
 
 const CommentBox = props => {
-  console.log(props);
   const [comment, setComment] = useState("");
-
-  useEffect(() => {
-    shouldNavigateAway();
-  });
-
-  const shouldNavigateAway = () => {
-    if (!props.auth) {
-      console.log("I NEED TO LEAVE");
-    }
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -40,11 +30,7 @@ const CommentBox = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return { auth: state.auth };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   actions
-)(CommentBox);
+)(requireAuth(CommentBox));
